@@ -10,12 +10,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Preserved Exact Fonts from Kinetic Code: Orbitron & Rajdhani -->
+    <!-- Preserved Fonts: Orbitron, Rajdhani & Cinzel -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;600;700&family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* Base & Reset - Restored Rajdhani & Orbitron Hierarchy */
+        /* Base & Reset */
         * { scroll-behavior: smooth; margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --bg: #03010a;
@@ -39,8 +39,16 @@
             font-size: 1.1rem;
         }
         
-        ::-webkit-scrollbar { width: 8px; background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--cyan), var(--magenta)); border-radius: 8px; }
+        /* Completely Hide Side Scrollbars Across All Browsers */
+        html, body {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE & Edge */
+        }
+        ::-webkit-scrollbar {
+            display: none; /* Chrome, Safari & Opera */
+            width: 0px;
+            background: transparent;
+        }
 
         /* Background WebGL & Canvas Effects */
         #webgl-bg {
@@ -73,7 +81,7 @@
             z-index: 2;
         }
 
-        /* --- SWORD & AURA FRAMING LOADER OVERLAY (Preserved Text & Cinzel Style) --- */
+        /* --- SWORD & AURA FRAMING LOADER OVERLAY --- */
         #loader-overlay {
             position: fixed;
             inset: 0;
@@ -109,7 +117,7 @@
             transform: translateY(-50%) rotate(-25deg) scale(0);
             transform-origin: center;
             opacity: 0;
-            filter: drop-shadow(0 0 20px #38bdf8) drop-shadow(0 0 35px #facc15);
+            filter: drop-shadow(0 0 20px #00f0ff) drop-shadow(0 0 35px #ff2d7a);
         }
         .slash-active #animated-sword {
             animation: swordSlashAction 0.5s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
@@ -120,8 +128,8 @@
             left: -20%;
             width: 140vw;
             height: 4px;
-            background: linear-gradient(90deg, transparent 0%, #38bdf8 30%, #facc15 70%, transparent 100%);
-            box-shadow: 0 0 15px #0ea5e9, 0 0 35px #facc15, 0 0 50px #38bdf8;
+            background: linear-gradient(90deg, transparent 0%, #ffffff 20%, #00f0ff 60%, #ff2d7a 100%, transparent 100%);
+            box-shadow: 0 0 20px #00f0ff, 0 0 40px #ff2d7a;
             transform: translateY(-50%) rotate(-25deg) scaleX(0);
             transform-origin: center;
             opacity: 0;
@@ -145,18 +153,19 @@
             100% { transform: translateY(-50%) rotate(-25deg) scaleX(1.3); opacity: 0; }
         }
 
+        /* Aura Title - Matching Exact Inner Page Gradient (#ffffff -> #00f0ff -> #ff2d7a) */
         .aura-title {
             font-family: 'Cinzel', serif;
             letter-spacing: 0.35em;
-            background: linear-gradient(135deg, #38bdf8, #ffffff, #facc15);
+            background: linear-gradient(135deg, #ffffff 20%, #00f0ff 60%, #ff2d7a 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+            text-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
             animation: auraPulse 2s ease-in-out infinite alternate;
         }
         @keyframes auraPulse {
-            0% { filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.4)); transform: scale(0.98); }
-            100% { filter: drop-shadow(0 0 25px rgba(250, 204, 21, 0.8)); transform: scale(1.02); }
+            0% { filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.4)); transform: scale(0.98); }
+            100% { filter: drop-shadow(0 0 25px rgba(255, 45, 122, 0.8)); transform: scale(1.02); }
         }
 
         /* --- HUD NAVBAR --- */
@@ -427,20 +436,20 @@
         <svg id="animated-sword" viewBox="0 0 1000 120" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#38bdf8"/>
-                    <stop offset="60%" stop-color="#ffffff"/>
-                    <stop offset="100%" stop-color="#facc15"/>
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="50%" stop-color="#00f0ff"/>
+                    <stop offset="100%" stop-color="#ff2d7a"/>
                 </linearGradient>
                 <linearGradient id="hiltGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#facc15"/>
-                    <stop offset="100%" stop-color="#854d0e"/>
+                    <stop offset="0%" stop-color="#ffd866"/>
+                    <stop offset="100%" stop-color="#a855f7"/>
                 </linearGradient>
             </defs>
             <path d="M150 50 L950 58 L1000 60 L950 62 L150 70 Z" fill="url(#bladeGrad)"/>
-            <path d="M160 60 L920 60" stroke="#0ea5e9" stroke-width="2"/>
+            <path d="M160 60 L920 60" stroke="#00f0ff" stroke-width="2"/>
             <path d="M140 25 C145 40 145 80 140 95 L160 90 C155 70 155 50 160 30 Z" fill="url(#hiltGrad)"/>
-            <circle cx="150" cy="60" r="8" fill="#38bdf8"/>
-            <rect x="50" y="53" width="90" height="14" rx="3" fill="#1e293b" stroke="#facc15" stroke-width="1.5"/>
+            <circle cx="150" cy="60" r="8" fill="#00f0ff"/>
+            <rect x="50" y="53" width="90" height="14" rx="3" fill="#03010a" stroke="#ffd866" stroke-width="1.5"/>
             <circle cx="40" cy="60" r="12" fill="url(#hiltGrad)"/>
         </svg>
 
@@ -449,7 +458,7 @@
         <div id="loader-content" class="fixed inset-0 z-30 flex flex-col items-center justify-center gap-4 transition-opacity duration-300">
             <div class="relative flex items-center justify-center px-8 py-4 rounded-2xl bg-slate-950/60 border border-sky-500/30 backdrop-blur-md">
                 <h1 class="aura-title text-3xl md:text-5xl font-extrabold uppercase tracking-widest">
-                    DESIGNING
+                    AURA FRAMING
                 </h1>
             </div>
             <span class="text-xs tracking-[0.35em] font-mono text-slate-400 uppercase">
@@ -1105,28 +1114,45 @@
         // Init AOS
         AOS.init({ duration: 600, once: true });
 
-        // --- SWORD & AURA FRAMING LOADER TRIGGER ---
-        window.addEventListener('load', () => {
+        // --- SWORD & AURA FRAMING LOADER TRIGGER WITH FAILSAFE ---
+        function initLoader() {
             const loaderOverlay = document.getElementById('loader-overlay');
             const loaderContent = document.getElementById('loader-content');
 
+            if (!loaderOverlay || loaderOverlay.dataset.triggered) return;
+            loaderOverlay.dataset.triggered = "true";
+
+            // 1. Fade out emblem
             setTimeout(() => {
                 if (loaderContent) loaderContent.style.opacity = '0';
-            }, 800);
+            }, 600);
 
+            // 2. Perform Sword Strike
             setTimeout(() => {
-                if (loaderOverlay) loaderOverlay.classList.add('slash-active');
-            }, 1100);
+                loaderOverlay.classList.add('slash-active');
+            }, 900);
 
+            // 3. Perform Cut Separation
             setTimeout(() => {
-                if (loaderOverlay) loaderOverlay.classList.add('slash-cut');
-            }, 1400);
+                loaderOverlay.classList.add('slash-cut');
+            }, 1200);
 
+            // 4. Remove Overlay Completely
             setTimeout(() => {
-                if (loaderOverlay) loaderOverlay.style.display = 'none';
+                loaderOverlay.style.display = 'none';
                 typeWriter();
-            }, 2200);
-        });
+            }, 1800);
+        }
+
+        // Multiple triggers to ensure loader NEVER gets stuck
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(initLoader, 300);
+        } else {
+            window.addEventListener('DOMContentLoaded', initLoader);
+            window.addEventListener('load', initLoader);
+        }
+        // Failsafe timeout
+        setTimeout(initLoader, 2500);
 
         // --- TYPEWRITER LOGIC ---
         const textToType = "> SYS//INIT: Jiya Shah (Frontend Architect & UI/UX Specialist)";
@@ -1135,14 +1161,15 @@
         let charIndex = 0;
 
         function typeWriter() {
+            if (!typeWriterElement) return;
             if (charIndex < textToType.length) {
                 typeWriterElement.innerHTML += textToType.charAt(charIndex);
                 charIndex++;
-                setTimeout(typeWriter, 35);
+                setTimeout(typeWriter, 30);
             } else {
                 setTimeout(() => {
                     if (heroReveal) heroReveal.classList.remove('opacity-0');
-                }, 150);
+                }, 100);
             }
         }
 
